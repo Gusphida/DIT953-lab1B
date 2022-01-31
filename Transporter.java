@@ -10,7 +10,7 @@ public class Transporter extends ACar implements ITransporter{
         UP, DOWN
     }
     public Direction rampMode;
-    private ArrayList<ACar> cars = new ArrayList<>();
+    public ArrayList<ACar> cars = new ArrayList<>();
     private final int maxCars;
 
     /**
@@ -65,14 +65,16 @@ public class Transporter extends ACar implements ITransporter{
     @Override
     public void move() {
         //Moves the car based on current direction
-        startEngine();
-        switch (direction) {
-            case UP -> position.y += currentSpeed;
-            case DOWN -> position.y -= currentSpeed;
-            case LEFT -> position.x -= currentSpeed;
-            case RIGHT -> position.x += currentSpeed;
+        if (rampMode == Direction.UP) {
+            startEngine();
+            switch (direction) {
+                case UP -> position.y += currentSpeed;
+                case DOWN -> position.y -= currentSpeed;
+                case LEFT -> position.x -= currentSpeed;
+                case RIGHT -> position.x += currentSpeed;
+            }
+            updateCarPositions();
         }
-        updateCarPositions();
     }
 
     /**

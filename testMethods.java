@@ -1,14 +1,15 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 public class testMethods {
 
-    private ACar volvo;
-    private ACar saab;
-    private ACar scania;
-    private ACar transporter;
+    private Volvo240 volvo;
+    private Saab95 saab;
+    private Scania scania;
+    private Transporter transporter;
 
     @Before
     public void init() {
@@ -80,12 +81,47 @@ public class testMethods {
     }
 
     @Test
-    public void testIncreaseAngle(){
-        //double initAngle = scania.getPlatformAngle();
+    public void testIncreaseAngleScania(){
+        double initAngle = scania.getPlatformAngle();
+        scania.raiseAngle(10);
+        assertTrue(initAngle < scania.getPlatformAngle());
+    }
+
+    @Test
+    public void testGasNotIncreaseSpeedScania(){
+        scania.platformAngle = 10;
+        scania.gas(1);
+        assertTrue(scania.currentSpeed == 0);
     }
 
     @Test
     public void testToggleRamp() {
-        //transporter.rampMode
+        ACar.Direction initRamp = transporter.direction;
+        transporter.toggleRamp();
+        assertNotSame(initRamp, transporter.rampMode);
+    }
+
+    @Test
+    public void testCarLoadedTransporter(){
+        transporter.rampMode = Transporter.Direction.DOWN;
+        transporter.loadCar(volvo);
+        assertTrue(transporter.cars.size() > 0);
+    }
+
+    @Test
+    public void testCarUnloadedTransporter(){
+        transporter.rampMode = Transporter.Direction.DOWN;
+        transporter.loadCar(volvo);
+        transporter.unloadCar();
+        assertTrue(transporter.cars.size() == 0);
+    }
+
+    @Test
+    public void testCarPositionUpdateOnMove(){
+        transporter.rampMode = Transporter.Direction.DOWN;
+        transporter.loadCar(volvo);
+        transporter.rampMode = Transporter.Direction.UP;
+        transporter.move();
+        assertTrue(transporter.cars.get(0).position.y > 0);
     }
 }
