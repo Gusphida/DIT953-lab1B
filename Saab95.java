@@ -15,6 +15,7 @@ public class Saab95 extends ACar {
         enginePower = 125;
         turboOn = false;
         modelName = "Saab95";
+        transportable = true;
         stopEngine();
     }
 

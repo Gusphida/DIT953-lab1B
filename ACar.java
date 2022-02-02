@@ -22,6 +22,7 @@ public abstract class ACar implements Movable {
     public double currentSpeed; // The current speed of the car
     public Color color; // Color of the car
     public String modelName; // The car model name
+    public boolean transportable; //Able to be transported or not
 
     //---------Getters-----------
 

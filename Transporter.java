@@ -23,6 +23,7 @@ public class Transporter extends ACar implements ITransporter{
         modelName = "Transporter";
         rampMode = Direction.UP;
         maxCars = 6;
+        transportable = false;
         stopEngine();
     }
 
@@ -40,9 +41,9 @@ public class Transporter extends ACar implements ITransporter{
     /**
      * Puts a car in the list of cars loaded on the transporter
      */
-    public void loadCar(ACar car){ //TODO add size restriction
+    public void loadCar(ACar car){
         if (rampMode == Direction.DOWN && (car.position.x-position.x) <= 10 && (car.position.y-position.y) <= 10) {
-            if (!(car instanceof ITransporter) && cars.size() < maxCars ) {
+            if (car.transportable && cars.size() < maxCars) {
                 cars.add(car);
             }
         }
@@ -81,8 +82,8 @@ public class Transporter extends ACar implements ITransporter{
      * updates all the positions of the cars on the transporter
      */
     public void updateCarPositions(){
-        for (int i = 0; i < cars.size(); i++){
-            cars.get(i).position = position;
+        for (ACar car : cars){
+            car.position = position;
         }
     }
 }

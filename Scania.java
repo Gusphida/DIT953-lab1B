@@ -16,6 +16,7 @@ public class Scania extends ACar {
         enginePower = 125;
         modelName = "Scania";
         platformAngle = 0;
+        transportable = false;
         stopEngine();
     }
 
@@ -51,7 +52,7 @@ public class Scania extends ACar {
     @Override
     public void startEngine() {
         if (platformAngle == 0) {
-            currentSpeed = 0.1;
+            super.startEngine();
         }
     }
 
@@ -59,10 +60,10 @@ public class Scania extends ACar {
      * Increases the cars current speed based on an interval of 0 to 1 if the angle is 0
      */
     @Override
-    public void gas (double amount){
+    public void gas(double amount){
         //Calls on incrementSpeed within an interval of 0 to 1
-        if (amount <= 1 && amount >= 0 && platformAngle == 0) {
-            incrementSpeed(amount);
+        if (platformAngle == 0) {
+            super.gas(amount);
         }
     }
 }

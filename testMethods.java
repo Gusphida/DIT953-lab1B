@@ -117,7 +117,7 @@ public class testMethods {
     }
 
     @Test
-    public void testCarPositionUpdateOnMove(){
+    public void testCarPositionUpdateOnMoveTransporter(){
         transporter.rampMode = Transporter.Direction.DOWN;
         transporter.loadCar(volvo);
         transporter.rampMode = Transporter.Direction.UP;

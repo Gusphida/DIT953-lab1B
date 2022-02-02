@@ -14,6 +14,7 @@ public class Volvo240 extends ACar {
         color = Color.black;
         enginePower = 100;
         modelName = "Volvo240";
+        transportable = true;
         stopEngine();
     }
 

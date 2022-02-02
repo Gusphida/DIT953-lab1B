@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * The Workshop class introduces a workshop for cars.
+ */
+
 public class Workshop<T extends ACar> {
     private int maxCars;
     private ArrayList<T> cars = new ArrayList<>();
@@ -15,7 +19,7 @@ public class Workshop<T extends ACar> {
      * Adds a car if theres room in the workshop
      */
     public void loadCar(T car){
-        if (maxCars <= cars.size()) {
+        if (maxCars >= cars.size()) {
             cars.add(car);
         }
     }
@@ -24,11 +28,11 @@ public class Workshop<T extends ACar> {
      * Removes a car from the workshop and returns the model
      * @return the name of the cars model
      */
-    public String unloadCar(int index){
-        if (cars.size() == 0) {
-            return "No cars";
+    public T unloadCar(int index){
+        if (cars.size() == 0 && cars.size() > index){
+            return null;
         }
         T car = cars.remove(index);
-        return car.modelName;
+        return car;
     }
 }
